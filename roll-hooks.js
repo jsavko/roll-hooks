@@ -1,14 +1,14 @@
  Hooks.on('preCreateChatMessage', (chatMessage, user, data, id) => { 
-    if (data.rollMode == "roll") {
-      chatMessage.flags.dicehooks = {targets: Array.from(game.user.targets).map(i=>i.document.uuid), isRoll: true}
-      chatMessage.updateSource({ flags: chatMessage.flags})
+   // Support for pf2e damage rolls. Damage rolsl in pf2e don't have data.rollMode roll 
+    if (data.rollMode == "roll" || chatMessage.rolls?.length > 0) {
+      chatMessage.updateSource({ 'flags.dicehooks': {targets: Array.from(game.user.targets).map(i=>i.document.uuid), isRoll: true}})
+
     }
  });
 
- Hooks.on('createChatMessage', (chatMessage, data) => { 
+ Hooks.on('createChatMessage', (chatMessage, data) => {
    if (chatMessage.flags.dicehooks) {
-      chatMessage.flags.dicehooks.firstRender = true;
-      chatMessage.updateSource({ flags: chatMessage.flags})
+      chatMessage.updateSource({ 'flags.dicehooks.firstRender': true})
       Hooks.callAll('createRollResult', buildDiceHookData(chatMessage));
    }
  });
@@ -34,10 +34,11 @@ Hooks.on('renderChatMessage', (chatMessage, html, data) => {
 
 function buildDiceHookData(chatMessage) {
    let rollResults = {}
-   rollResults.rolls = chatMessage.rolls
+   rollResults.rolls = chatMessage.rolls;
+   rollResults.firstDieFaceValue = chatMessage.rolls[0].terms[0].results[0].result;
    rollResults.speaker = chatMessage.speaker;
    rollResults.messageId = chatMessage._id;
-   rollResults.firstRollResult = chatMessage.rolls[0]._total
+   rollResults.firstRollResult = chatMessage.rolls[0]._total;
+   rollResults.flags = chatMessage.flags;
    return rollResults;
 }
-
