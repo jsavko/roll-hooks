@@ -14,10 +14,11 @@ Both hooks return an object
   },
   "messageId": "v8o4nshYe8bhpWEB", // id of the chatMessage where the roll originated
   "firstRollResult": 16  // The first result of the rolls array
-}```
-
+}
+```
 
 Examples
+
 ```
 Hooks.on('createRollResult', (rollResult) => { 
    console.log(rollResult);
@@ -25,6 +26,7 @@ Hooks.on('createRollResult', (rollResult) => {
 ```
 
 Popup a warning when a total of 20 is rolled.
+
 ```
 Hooks.on('renderRollResult', (rollResult) => { 
    if (rollResult.firstRollResult == 20) { 
