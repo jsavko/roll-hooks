@@ -13,7 +13,8 @@ Both hooks return an object
     "alias": "Gamemaster" // id of name of actor or player where roll originated
   },
   "messageId": "v8o4nshYe8bhpWEB", // id of the chatMessage where the roll originated
-  "firstRollResult": 16  // The first result of the rolls array
+  "firstRollResult": 16,  // The first result of the rolls array
+  flags: {}  // Any flags added by systems 
 }
 ```
 
