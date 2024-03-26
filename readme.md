@@ -30,7 +30,7 @@ Popup a warning when a total of 20 is rolled.
 
 ```
 Hooks.on('renderRollResult', (rollResult) => { 
-   if (rollResult.firstRollResult == 20) { 
+   if (rollResult.firstDieFaceValue == 20) { 
      ui.notifications.warn('20!!!!!!!!!!')
    }
 })
