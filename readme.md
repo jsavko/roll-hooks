@@ -14,6 +14,7 @@ Both hooks return an object
   },
   "messageId": "v8o4nshYe8bhpWEB", // id of the chatMessage where the roll originated
   "firstRollResult": 16,  // The first result of the rolls array
+  "firstDieFaceValue" 16, // The face value of the first die rolled before any modifiers
   flags: {}  // Any flags added by systems 
 }
 ```
